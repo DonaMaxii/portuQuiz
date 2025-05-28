@@ -1,0 +1,11 @@
+Qual é o nome do irmão do Mario?|Super Mario|3|Luigi|Wario|Luigi|Yoshi|Bowser
+Em qual jogo Mario ganhou pela primeira vez a habilidade de voar com um power-up?|Super Mario|2|Super Mario Bros.|Super Mario Bros. 3|Super Mario World|Super Mario 64
+Qual é o poder principal da Estrela Dourada (Super Star) em Super Mario?|Super Mario|4|Dar vida extra|Transformar Mario em Fire Mario|Tornar Mario invencível|Aumentar sua velocidade
+Qual personagem NÃO é um companheiro de aventura de Mario em seus jogos?|Super Mario|1|Zelda|Toad|Rosalina|Cappy
+Qual é o nome do reino onde a maioria dos jogos do Mario acontece?|Super Mario|1|Reino do Cogumelo|Reino Sarasaland|Reino Champignon|Diamond City
+Qual é o nome da espada lendária que Link usa em vários jogos da série Zelda?|The Legend of Zelda|4|Espada do Tempo|Espada dos Sábios|Espada Mestra|Espada Mestra
+Qual desses NÃO é um item recorrente na série The Legend of Zelda?|The Legend of Zelda|1|Fire Flower|Hookshot|Bombs|Boomerang
+Qual é o nome do vilão principal da série The Legend of Zelda?|The Legend of Zelda|2|Vaati|Ganon(dorf)|Zant|Demise
+Em qual jogo Zelda foi introduzido o sistema de "dungeons" em 3D pela primeira vez?|The Legend of Zelda|3|A Link to the Past|Ocarina of Time|Ocarina of Time|Twilight Princess
+Qual desses itens de Zelda NÃO aparece em "Ocarina of Time"?|The Legend of Zelda|2|Magnesis (do Breath of the Wild)|Hookshot|Ocarina|Mirror Shield
+
