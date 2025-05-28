@@ -54,7 +54,7 @@ programa
 		escreva("\n--------------")
 		escreva("\nEscolha uma opção para comecar: \n\n")
 		escreva("1 - INICIAR JOGO\n")
-		escreva("2 - ENCERRAR\n")
+		escreva("2 - ENCERRAR\n\n")
 
 		caracter opcao1
 		leia(opcao1)
@@ -62,14 +62,50 @@ programa
 		escolha (opcao1)
 		{
 			caso '1':
-			escreva("Aqui insiro o menu de opções. Bom trabalho.")
-			Util.aguarde(60000)
-			//menu_opcoes()
+			//escreva("Aqui insiro o menu de opções. Bom trabalho.")
+			menu_opcoes()
 			pare
 
 			caso '2':
 			Util.aguarde(10)
 		}
+	}
+
+	funcao menu_opcoes()
+	{
+		limpa()
+		escreva("Selecione o tema das questões: ")
+		escreva("\n------------------------------")
+		escreva("\n\n")
+		escreva("1 - Super Mario")
+		escreva("\n2 - The Legend of Zelda\n\n")
+
+		caracter opcao2
+		logico escolha_menu = falso
+
+		enquanto(escolha_menu == falso)
+		{
+			leia(opcao2)
+			escolha (opcao2)
+			{
+				caso '1':
+				//Aqui vem o jogo com as questões de Super Mario.
+				escreva("Aqui vem o jogo com as questões de Super Mario. Boa sorte!")
+				Util.aguarde(10000)
+				pare
+	
+				caso '2':
+				//Aqui vem o jogo com as questões de The Legend of Zelda.
+				escreva("Aqui vem o jogo com as questões de The Legend of Zelda. Boa sorte!")
+				Util.aguarde(10000)
+				pare
+	
+				caso contrario:
+				escreva("Por gentileza, escolha uma opção válida: ")
+				escolha_menu = falso
+			}
+		}
+		
 	}
 }
 /* $$$ Portugol Studio $$$ 
@@ -77,7 +113,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 791; 
+ * @POSICAO-CURSOR = 1506; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
