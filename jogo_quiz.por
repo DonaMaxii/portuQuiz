@@ -5,57 +5,79 @@ programa
 	inclua biblioteca Arquivos --> file
 	inclua biblioteca Texto --> txt
 	inclua biblioteca Util
-
+	
 	//Matrizes necessárias para o funcionamento do quiz
-	cadeia matriz_1[5][7] //matriz do tema "Super Mario"
-	cadeia matriz_2[5][7] //matriz do tema "The Legend of Zelda"
+	cadeia matriz_quiz[100][7] //Matriz geral
+
+	//Vetor para armazenar as categorias - máximo de 10 categorias
+	cadeia v_categoria[10]
+
+	//variável para armazenar a escolha do TEMA
+	cadeia tema = ""
+
+	//variável para armazenar a escolha do Nº de questões
+	inteiro qtde_questoes = 0
 	
 	funcao inicio()
 	{
-		//musica_fundo()
-		//carregar_quiz()
-		//menu_principal()
-		quiz_matriz()
+		musica_fundo()
+		menu_principal()
+		menu_opcoes()
 	}
 
-	funcao quiz_matriz()
+	funcao matriz_do_quiz()
 	{
-		//Função para organizar o arquivo quiz.txt, carregado no programa via "carregar_quiz()",
-		//em matrizes, conforme tema escolhido em menu_opcoes().
-
 		inteiro quiz = carregar_quiz()
-		//para (inteiro linha = 0; linha < 10; linha++)
-		//{
-		inteiro linha = 0
-		cadeia linha_atual = "Qual personagem NÃO é um companheiro de aventura de Mario em seus jogos?|Super Mario|1|Zelda|Toad|Rosalina|Cappy"
-		inteiro categoria = txt.posicao_texto("Super Mario", linha_atual, 0)
 		
-		se (categoria != -1)
+		para (inteiro linha = 0; linha < Util.numero_linhas(matriz_quiz); linha++)
 		{
-			para (inteiro coluna = 0; coluna < 7; coluna++)
+			cadeia linha_atual = file.ler_linha(quiz)
+
+			para (inteiro coluna = 0; coluna < Util.numero_colunas(matriz_quiz); coluna++)
 			{
-				//primeiro, pesquisa as ocorrências de "Super Mario" em cada linha, uma por cada linha
-				//cadeia linha_atual = file.ler_linha(quiz)
 				inteiro pipe = txt.posicao_texto("|", linha_atual, 0)
 				se (pipe < txt.numero_caracteres(linha_atual) e pipe != -1)
 				{
-					matriz_1[linha][coluna] = txt.extrair_subtexto(linha_atual, 0, pipe)
+					matriz_quiz[linha][coluna] = txt.extrair_subtexto(linha_atual, 0, pipe)
 					linha_atual = txt.extrair_subtexto(linha_atual, pipe + 1, txt.numero_caracteres(linha_atual)) 
 				}
 				senao se (pipe == -1)
 				{
-					matriz_1[linha][coluna] = linha_atual
+					matriz_quiz[linha][coluna] = linha_atual
 				}
+				//teste se a matriz está populada com os dados do arquivo. Provisório. Ignora linhas não existentes.
+				//se (linha_atual != "")
+				//escreva("valor em matriz_quiz[", linha, "][", coluna, "]: ", matriz_quiz[linha][coluna], "\n")
 			}
 		}
-		//teste se a matriz está sendo escrita a primeira coluna. Provisório.
-		para (inteiro coluna = 0; coluna < 7; coluna++)
-		{
-			escreva("valor em matriz_1[0][", coluna, "]: ", matriz_1[0][coluna], "\n")
-		}
-		
 	}
 
+	funcao categorias()
+	{
+		//Aqui iremos rastrear as categorias e trazê-las para o menu de opções e para 
+		//o sorteio das perguntas
+		matriz_do_quiz()
+		//------------------------------------
+		v_categoria[0] = matriz_quiz[0][1]
+		inteiro cat = 1
+		para (inteiro cont = 1; cont < Util.numero_linhas(matriz_quiz); cont++)
+		{
+			se (matriz_quiz[cont][1] != matriz_quiz[cont-1][1])
+			{
+				v_categoria[cat] = matriz_quiz[cont][1]
+				cat++
+			}
+		}
+		/*
+		//Teste para saber se as categoria estão registrando certinho.
+		para (inteiro cont=0; cont<10; cont++)
+		{
+			se (v_categoria[cont] != "")
+				escreva("Valor em v_categoria[", cont, "]: ", v_categoria[cont], "\n")
+		}
+		*/
+	}
+	
 	funcao musica_fundo()
 	{
 		//Carregar uma música suave de fundo, com volume em 30%
@@ -69,17 +91,9 @@ programa
 	{
 		cadeia arquivo_quiz = "./quiz.txt"
 		inteiro quiz = file.abrir_arquivo(arquivo_quiz, file.MODO_LEITURA)
-		retorne quiz
-		//Teste para aplicação no projeto. Remover depois.
-		/*
-		para (inteiro cont = 0; cont < 11; cont++)
-		{
-			escreva(file.ler_linha(quiz))
-			escreva("\n") 
-		}
-		 */
-
+		retorne quiz	
 	}
+	
 	funcao menu_principal()
 	{
 		//Tela-título
@@ -92,8 +106,9 @@ programa
 		escreva("█     █   █ █      █   █   █  █   ██ █   █ █  █\n")
 		escreva("█      ███  █      █    ███    ████   ███  █ █████")
 		
-		escreva("\n\nO seu game favorito de perguuntas e respostas!")
+		escreva("\n\nO seu game favorito de perguntas e respostas!")
 
+		/*
 		escreva("\n\nMENU PRINCIPAL")
 		escreva("\n--------------")
 		escreva("\nEscolha uma opção para comecar: \n\n")
@@ -113,72 +128,84 @@ programa
 			caso '2':
 			Util.aguarde(10)
 		}
+		*/
+		Util.aguarde(2000)
+		menu_opcoes()
+		
 	}
 
 	funcao menu_opcoes()
 	{
 		//Menu para as opções de jogo: categoria e número de questões.
-		limpa()
+		//limpa()
+		categorias() //inicia a função para popular v_categorias (vetor)
+
+		escreva("\n\n\n")
 		escreva("Selecione o tema das questões: ")
 		escreva("\n------------------------------")
 		escreva("\n\n")
-		escreva("1 - Super Mario")
-		escreva("\n2 - The Legend of Zelda\n\n")
-
-		caracter opcao1
-		inteiro opcao2
-		logico escolha_menu = falso
-
-		enquanto(escolha_menu == falso)
+		
+		para (inteiro cont = 0; cont < Util.numero_elementos(v_categoria); cont++)
 		{
-			leia(opcao1)
-			escolha (opcao1)
+			se (v_categoria[cont] != "")
+				escreva(cont + 1, " - ", v_categoria[cont], ";", "\n")
+		}
+
+		inteiro opcao //leitura da escolha do jogador
+		logico escolha_menu = falso //validação do laço de repetição, na ausência do switch... case.
+
+		enquanto (escolha_menu == falso)
+		{
+			leia(opcao)
+			se (opcao < 0 ou opcao > Util.numero_elementos(v_categoria))
+				{
+					escreva("Por favor, escolha uma opção do menu: ")
+					escolha_menu = falso
+				}
+			senao
 			{
-				caso '1':
-				//Aqui vem o jogo com as questões de Super Mario.
-				escreva("Aqui vem o jogo com as questões de SUPER MARIO. Boa sorte!")
-				Util.aguarde(1000)
-				escolha_menu = verdadeiro
-				pare
-	
-				caso '2':
-				//Aqui vem o jogo com as questões de The Legend of Zelda.
-				escreva("Aqui vem o jogo com as questões de THE LEGEND OF ZELDA. Boa sorte!")
-				Util.aguarde(1000)
-				escolha_menu = verdadeiro
-				pare
-	
-				caso contrario:
-				escreva("Por gentileza, escolha uma opção válida: ")
-				escolha_menu = falso
+				para (inteiro cont = 0; cont < Util.numero_elementos(v_categoria); cont++)
+				{
+					se (opcao == cont + 1 e v_categoria[cont] != "")
+					{
+						tema = v_categoria[cont]
+						escolha_menu = verdadeiro
+						escreva("Você escolheu a categoria ", tema, ". Boa sorte!")
+						Util.aguarde(1200)
+					}
+					senao se (opcao == cont + 1 e tema == "")
+					{
+						escreva("Por favor, escolha uma opção do menu: ")
+						escolha_menu = falso
+					}
+				}
 			}
 		}
 		
 		//Escolha do número de questões
 		limpa()
-		escreva("Escolha o número de questões para responder: \n\n")
+		escreva("Escolha o número de questões para responder (min. 5, máx. 10): \n\n")
 		escreva("---> ")
-		leia(opcao2)
+		leia(qtde_questoes)
+		enquanto (qtde_questoes < 5 ou qtde_questoes > 10)
+		{
+			escreva("Por favor, escolha um número entre 5 e 10 questões: ")
+			leia(qtde_questoes)
+		}
 
-		carregando()
+
+		carregando(10)
 		//jogo_principal()
 	}
 	
-	funcao carregando()
+	funcao carregando(inteiro dot)
 	{
 		//botão bonitinho para simular carregamento
-		para (inteiro cont=0; cont<20; cont++)
+		escreva("Carregando.")
+		para (inteiro cont=0; cont < dot; cont++)
 		{
-			limpa()
-			escreva("--")
-			Util.aguarde(100)
-			limpa()
-			escreva("|")
-			Util.aguarde(100)
-			limpa()
-			escreva("/")
-			Util.aguarde(100)
-			limpa()	
+			escreva(".")
+			Util.aguarde(500)	
 		}
 	}
 }
@@ -187,7 +214,8 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 849; 
+ * @POSICAO-CURSOR = 3105; 
+ * @DOBRAMENTO-CODIGO = [27, 54, 80, 89];
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
