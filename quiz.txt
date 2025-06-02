@@ -3,9 +3,28 @@ Em qual jogo Mario ganhou pela primeira vez a habilidade de voar com um power-up
 Qual é o poder principal da Estrela Dourada (Super Star) em Super Mario?|Super Mario|4|Dar vida extra|Transformar Mario em Fire Mario|Tornar Mario invencível|Aumentar sua velocidade
 Qual personagem NÃO é um companheiro de aventura de Mario em seus jogos?|Super Mario|1|Zelda|Toad|Rosalina|Cappy
 Qual é o nome do reino onde a maioria dos jogos do Mario acontece?|Super Mario|1|Reino do Cogumelo|Reino Sarasaland|Reino Champignon|Diamond City
+Qual é o nome do dinossauro amigo do Mario que pode comer inimigos com a língua?|Super Mario|4|Yoshi|Yoshi|Bowser Jr.|Kamek
+Qual power-up transforma o Mario em um animal que pode planar e cavar?|Super Mario|3|Super Cogumelo|Flor de Fogo|Pena (Tanooki / Raccoon)|Estrela Dourada
+Qual destes NÃO é um mundo em "Super Mario Bros. 3"?|Super Mario|2|Mundo do Céu|Mundo da Lua|Mundo do Gelo|Mundo do Deserto
+Quem é o chefe final em "Super Mario Odyssey"?|Super Mario|1|Bowser|Rei dos Koopas|Wario|Diddy Kong
+Qual jogo introduziu pela primeira vez a personagem Rosalina?|Super Mario|4|Super Mario 64|Super Mario Sunshine|Super Mario Galaxy|New Super Mario Bros.
 Qual é o nome da espada lendária que Link usa em vários jogos da série Zelda?|The Legend of Zelda|4|Espada do Tempo|Espada dos Sábios|Espada Mestra|Espada Mestra
 Qual desses NÃO é um item recorrente na série The Legend of Zelda?|The Legend of Zelda|1|Fire Flower|Hookshot|Bombs|Boomerang
 Qual é o nome do vilão principal da série The Legend of Zelda?|The Legend of Zelda|2|Vaati|Ganon(dorf)|Zant|Demise
 Em qual jogo Zelda foi introduzido o sistema de "dungeons" em 3D pela primeira vez?|The Legend of Zelda|3|A Link to the Past|Ocarina of Time|Ocarina of Time|Twilight Princess
 Qual desses itens de Zelda NÃO aparece em "Ocarina of Time"?|The Legend of Zelda|2|Magnesis (do Breath of the Wild)|Hookshot|Ocarina|Mirror Shield
-
+Qual é o nome da princesa que Link precisa resgatar na maioria dos jogos?|The Legend of Zelda|3|Zelda|Impa|Midna|Ruto
+Em "Breath of the Wild", qual habilidade permite Link manipular objetos metálicos?|The Legend of Zelda|1|Magnesis|Stasis|Cryonis|Bombs+
+Qual desses itens NÃO aparece em "A Link to the Past"?|The Legend of Zelda|4|Lâmpada de Fogo|Bumerangue|Paraglider|Túnica Vermelha
+Qual é o nome do cavalo lendário de Link em "Ocarina of Time"?|The Legend of Zelda|2|Epona|Agro|Shadowfax|Storm
+Qual jogo da série Zelda tem a temática de viagem no tempo entre passado e futuro?|The Legend of Zelda|3|Skyward Sword|Ocarina of Time|Majora's Mask|Twilight Princess
+Qual é o nome do cientista humano que cria os robôs para o Dr. Eggman?|Sonic the Hedgehog|2|Tails|Dr. Robotnik (Eggman)|Metal Sonic|Vector
+Qual personagem é uma equidna vermelha que usa lanças e tem um temperamento explosivo?|Sonic the Hedgehog|3|Shadow|Knuckles|Silver|Rouge
+Qual jogo introduziu pela primeira vez o personagem Shadow?|Sonic the Hedgehog|4|Sonic 1|Sonic CD|Sonic 3|Sonic Adventure 2
+Qual é o nome da raposa amiga do Sonic que pode voar com suas caudas?|Sonic the Hedgehog|1|Tails|Amy|Cream|Blaze
+Qual desses NÃO é um poder das Esmeraldas do Caos?|Sonic the Hedgehog|2|Super Velocidade|Invisibilidade|Transformação em Super Sonic|Teletransporte
+Qual é o nome do estágio icônico de Sonic com fundo azul e rampas em loop?|Sonic the Hedgehog|3|Chemical Plant|Green Hill Zone|Sky Sanctuary|Death Egg
+Qual personagem é uma ouriço rosa que persegue Sonic por paixão?|Sonic the Hedgehog|4|Rouge|Amy|Cream|Blaze
+Em qual jogo Sonic se transforma em um lobisomem?|Sonic the Hedgehog|1|Sonic Unleashed|Sonic Colors|Sonic Generations|Sonic Forces
+Qual é o nome da organização antagonista em "Sonic Heroes"?|Sonic the Hedgehog|2|Dark Brotherhood|Team Dark|Chaotix|Eggman Empire
+Qual desses NÃO é um jogo clássico do Sonic em 2D?|Sonic the Hedgehog|4|Sonic 1|Sonic 2|Sonic 3|Sonic Riders
