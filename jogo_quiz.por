@@ -1,5 +1,7 @@
 programa
-{
+{	
+	//Querido Professor, por favor, nos dê uma boa nota; esse jogo deu um trabalhão para fazer!
+	
 	//Bibliotecas necessárias
 	inclua biblioteca Sons
 	inclua biblioteca Arquivos --> file
@@ -10,8 +12,8 @@ programa
 	// variável para armazenar o endereço do quiz
 	inteiro quiz = 0
 	
-	//Matrizes necessárias para o funcionamento do quiz
-	cadeia matriz_quiz[100][7] //Matriz geral
+	//Matriz principal com todas as perguntas do quiz
+	cadeia matriz_quiz[100][7]
 
 	//Vetor para armazenar as categorias - máximo de 10 categorias
 	cadeia v_categoria[10]
@@ -34,13 +36,13 @@ programa
 	//Vetor para armazenar as alternativas corretas
 	inteiro v_corretas[10]
 
-	//vARIÁVEIS PARA CONTAR OS ACERTOS E OS ERROS
+	//Variáveis para armazenar a contagem de acertos e erros
 	inteiro cont_acertos = 0, cont_erros = 0
 	
 	funcao inicio()
 		{
 			carregar_quiz()
-			musica_fundo()
+			musica_fundo(70)
 			menu_principal()
 			jogo_quiz()
 			gameover()
@@ -48,8 +50,10 @@ programa
 
 	funcao matriz_do_quiz()
 	{
-		//inteiro quiz = carregar_quiz()
-		
+		//Função para montar a matriz principal com todas as perguntas presentes no arquivo.
+		//Máximo de 100 perguntas possíveis neste projeto.
+
+		//Loop "escaneando" cada linha e cada coluna na estrutura dos dados.
 		para (inteiro linha = 0; linha < Util.numero_linhas(matriz_quiz); linha++)
 		{
 			cadeia linha_atual = file.ler_linha(quiz)
@@ -57,14 +61,14 @@ programa
 			para (inteiro coluna = 0; coluna < Util.numero_colunas(matriz_quiz); coluna++)
 			{
 				inteiro pipe = txt.posicao_texto("|", linha_atual, 0)
-				se (pipe < txt.numero_caracteres(linha_atual) e pipe != -1)
+				se (pipe < txt.numero_caracteres(linha_atual) e pipe != -1) //Se encontrou "|"
 				{
-					matriz_quiz[linha][coluna] = txt.extrair_subtexto(linha_atual, 0, pipe)
+					matriz_quiz[linha][coluna] = txt.extrair_subtexto(linha_atual, 0, pipe) //Subtrai a coluna
 					linha_atual = txt.extrair_subtexto(linha_atual, pipe + 1, txt.numero_caracteres(linha_atual)) 
 				}
-				senao se (pipe == -1)
+				senao se (pipe == -1) //Se encorrou todos os "|"
 				{
-					matriz_quiz[linha][coluna] = linha_atual
+					matriz_quiz[linha][coluna] = linha_atual // Alternativa 4 (coluna 6)
 				}
 			}
 		}
@@ -72,7 +76,7 @@ programa
 
 	funcao categorias()
 	{
-		//Aqui iremos rastrear as categorias e trazê-las para o menu de opções e para 
+		//Aqui, iremos rastrear as categorias e trazê-las para o menu de opções e para 
 		//o sorteio das perguntas
 		matriz_do_quiz()
 		v_categoria[0] = matriz_quiz[0][1]
@@ -87,20 +91,21 @@ programa
 		}
 	}
 	
-	funcao musica_fundo()
+	funcao musica_fundo(inteiro vol)
 	{
-		//Carregar uma música suave de fundo, com volume em 30%
+		//Carregar uma música suave de fundo, com volume customizável
 		cadeia arquivo_musica = "./bgmusic.mp3"
 		inteiro bgmusica = Sons.carregar_som(arquivo_musica)
-		Sons.definir_volume(60)
+		Sons.definir_volume(vol)
 		Sons.reproduzir_som(bgmusica, verdadeiro)
 	}
 
 	funcao inteiro carregar_quiz()
 	{
+		//Função para puxar os dados do arquivo "quiz.txt"
 		cadeia arquivo_quiz = "./quiz.txt"
 		quiz = file.abrir_arquivo(arquivo_quiz, file.MODO_LEITURA)
-		retorne quiz	
+		retorne quiz
 	}
 	
 	funcao menu_principal()
@@ -124,7 +129,6 @@ programa
 	funcao menu_opcoes()
 	{
 		//Menu para as opções de jogo: categoria e número de questões.
-		//limpa()
 		categorias() //inicia a função para popular v_categorias (vetor)
 
 		escreva("\n\n\n")
@@ -138,8 +142,9 @@ programa
 				escreva(cont + 1, " - ", v_categoria[cont], ";", "\n")
 		}
 
-		inteiro opcao //leitura da escolha do jogador
-		logico escolha_menu = falso //validação do laço de repetição, na ausência do switch... case.
+		//leitura da escolha do jogador
+		inteiro opcao 
+		logico escolha_menu = falso //validação do laço de repetição, alternativo ao uso de switch... case.
 
 		enquanto (escolha_menu == falso)
 		{
@@ -172,7 +177,7 @@ programa
 			}
 		}
 		
-		//Escolha do número de questões
+		//Escolha do número de questões pelo jogador
 		limpa()
 		escreva("Escolha o número de questões para responder (min. 5, máx. 10): \n\n")
 		escreva("---> ")
@@ -183,14 +188,14 @@ programa
 			leia(qtde_questoes)
 		}
 
-
+		escreva("\n")
 		carregando(10)
-		//jogo_principal()
 	}
 	
 	funcao carregando(inteiro dot)
 	{
-		//botão bonitinho para simular carregamento
+		//Função bonitinha para simular carregamento
+		//Personalizável pelo parâmetro dot = pontos
 		escreva("Carregando.")
 		para (inteiro cont=0; cont < dot; cont++)
 		{
@@ -201,9 +206,10 @@ programa
 
 	funcao define_categoria()
 	{
-		//Aqui atribuḿos o tema às questões (e seus respectivos índices na
-		//matriz), para sortear as questões do do tema escolhido
-		//logo em seguida. usarei qtde_inicio e qtde_fim.
+		//Aqui atribuḿos o tema às questões (e seus respectivos índices na matriz),
+		//para sortear as questões do do tema escolhido
+		//logo em seguida. usamos as variáveis qtde_inicio e qtde_fim para
+		//salvar o intervalo das questões da matriz principal.
 		//Ex: v_categoria[0] = linhas 0 a 9
 		//    v_categoria[1] = linhas 10 a 19
 
@@ -219,14 +225,14 @@ programa
 
 	funcao sorteia_perguntas()
 	{
-		//qtde_questoes = 6 //Só um exemplo de quantas perguntas o usuario escolheu para responder
-		//quiz_inicio = 0
-		//quiz_fim = 9//intervalo para puxar da matriz principal
+		//Função para sortear as perguntas armazenadas em vetor, evitando repetição,
+		//e armazenar em vetor próprio, para exibição logo em seguida.
+		
 		inteiro cont = 0
 		enquanto (cont < qtde_questoes) //Populando o vetor
 		{
 			inteiro sorteado = Util.sorteia(quiz_inicio, quiz_fim)
-			logico repete = falso // verifica se há repetição
+			logico repete = falso //Verifica se há repetição da pergunta sorteada
 			para (inteiro v_cont = 0; v_cont < cont; v_cont++)
 			{
 				se (v_quiz[v_cont] == sorteado)
@@ -250,9 +256,8 @@ programa
 		sorteia_perguntas()
 		//laço de repetição para mostrar as perguntas uma a uma
 		para (inteiro cont = 0; cont < qtde_questoes; cont++)
-		//para (inteiro cont = 0; cont < 2; cont++)
 		{
-			//função para montar a pergunta
+			//desvio condicional para armazenar os acertos e os erros
 			v_respostas[cont] = pergunta(v_quiz[cont], cont)
 			se (v_respostas[cont] == v_corretas[cont])
 				cont_acertos++
@@ -261,12 +266,12 @@ programa
 		}
 	}
 	
-	funcao inteiro pergunta(inteiro q, inteiro c) 
-	//q = questão; c = contagem; r = resposta
+	funcao inteiro pergunta(inteiro q, inteiro c)
+	//Função para a montagem da pergunta na tela
+	//Parâmetros: q = questão; c = contagem; r = resposta
 	{
 		//Exbindo a pergunta na tela
 		limpa()
-		//escreva("\n___________________________\n\n")
 		escreva("PERGUNTA ", c + 1, ":\n")
 		escreva(matriz_quiz[q][0])
 		escreva("\n\n")
@@ -301,6 +306,11 @@ programa
 
 		// Game over!
 		escreva("\nGAME OVER!")
+		escreva("\nObrigada por jogar o portuQuiz. Até a próxima! :)")
+
+		cadeia sair
+		escreva("\n\nPressione ENTER para encerrar.")
+		leia(sair)
 	}
 
 	funcao gabarito(inteiro q, inteiro c)
@@ -331,6 +341,8 @@ programa
 		escreva(cont_erros)
 		escreva("\n")
 	}
+	//portuQuiz. Todos os direitos reservados.
+	//Feito por Maxine e Larissa, com orientação do Prof. Flavio Viotti.
 }
 
 /* $$$ Portugol Studio $$$ 
@@ -338,7 +350,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 7625; 
+ * @POSICAO-CURSOR = 273; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
