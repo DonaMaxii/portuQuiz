@@ -5,6 +5,7 @@ programa
 	inclua biblioteca Arquivos --> file
 	inclua biblioteca Texto --> txt
 	inclua biblioteca Util
+	inclua biblioteca Tipos --> t
 
 	// variável para armazenar o endereço do quiz
 	inteiro quiz = 0
@@ -32,13 +33,17 @@ programa
 
 	//Vetor para armazenar as alternativas corretas
 	inteiro v_corretas[10]
+
+	//vARIÁVEIS PARA CONTAR OS ACERTOS E OS ERROS
+	inteiro cont_acertos = 0, cont_erros = 0
 	
 	funcao inicio()
 		{
 			carregar_quiz()
-			//musica_fundo()
+			musica_fundo()
 			menu_principal()
 			jogo_quiz()
+			gameover()
 		}
 
 	funcao matriz_do_quiz()
@@ -190,7 +195,7 @@ programa
 		para (inteiro cont=0; cont < dot; cont++)
 		{
 			escreva(".")
-			Util.aguarde(500)	
+			Util.aguarde(500)
 		}
 	}
 
@@ -243,16 +248,16 @@ programa
 		//sorteadas e armazenadas em vetor.
 		limpa()
 		sorteia_perguntas()
-		para (inteiro cont=0; cont < qtde_questoes; cont++) //Teste
-		{
-			escreva(v_quiz[cont])
-			escreva("\n")
-		}
 		//laço de repetição para mostrar as perguntas uma a uma
 		para (inteiro cont = 0; cont < qtde_questoes; cont++)
+		//para (inteiro cont = 0; cont < 2; cont++)
 		{
 			//função para montar a pergunta
 			v_respostas[cont] = pergunta(v_quiz[cont], cont)
+			se (v_respostas[cont] == v_corretas[cont])
+				cont_acertos++
+			senao
+				cont_erros++
 		}
 	}
 	
@@ -261,16 +266,19 @@ programa
 	{
 		//Exbindo a pergunta na tela
 		limpa()
-		escreva("\n___________________________\n\n")
+		//escreva("\n___________________________\n\n")
 		escreva("PERGUNTA ", c + 1, ":\n")
 		escreva(matriz_quiz[q][0])
 		escreva("\n\n")
-		escreva("1) ", matriz_quiz[q][3], ";\n")
-		escreva("2) ", matriz_quiz[q][4], ";\n")
-		escreva("3) ", matriz_quiz[q][5], ";\n")
-		escreva("4) ", matriz_quiz[q][6], ".\n")
+		escreva("1) ", matriz_quiz[q][3], "\n")
+		escreva("2) ", matriz_quiz[q][4], "\n")
+		escreva("3) ", matriz_quiz[q][5], "\n")
+		escreva("4) ", matriz_quiz[q][6], "\n")
 		//solicitando resposta do jogador
-		escreva("\nInforme a resposta: ")
+		escreva("\nInforme a resposta ---> ")
+		//Armazenar resposta correta da referida questão (e converter de cadeia para inteiro)
+		v_corretas[c] = Tipos.cadeia_para_inteiro(matriz_quiz[q][2], 10)
+		//Armazenar resposta do jogador
 		inteiro r
 		leia(r)
 		retorne r
@@ -280,6 +288,48 @@ programa
 	{
 		//Objetivo, mostrar o resultado para o jogador.
 		//exibir opção para voltar ao menu principal.
+		limpa()
+		carregando(15)
+		limpa()
+		para (inteiro cont = 0; cont < qtde_questoes; cont++)
+		{
+			//função para montar a pergunta
+			gabarito(v_quiz[cont],cont)
+		}
+		contagem_acertos()
+		contagem_erros()
+
+		// Game over!
+		escreva("\nGAME OVER!")
+	}
+
+	funcao gabarito(inteiro q, inteiro c)
+	{
+		//Exbindo a pergunta original na tela
+		escreva("PERGUNTA ", c + 1, ":\n")
+		escreva(matriz_quiz[q][0])
+		escreva("\n\n")
+		escreva("1) ", matriz_quiz[q][3], "\n")
+		escreva("2) ", matriz_quiz[q][4], "\n")
+		escreva("3) ", matriz_quiz[q][5], "\n")
+		escreva("4) ", matriz_quiz[q][6], "\n")
+		//Exibir a resposta dada pelo jogador
+		escreva("\nRESPOSTA DADA PELO JOGADOR ---> ", v_respostas[c])
+		escreva("\nRESPOSTA CORRETA ---> ", v_corretas[c])
+		escreva("\n\n--------------------------------------------\n")
+	}
+
+	funcao contagem_acertos()
+	{
+		escreva("Quantidade de acertos do jogador: ")
+		escreva(cont_acertos)
+		escreva("\n")
+	}
+	funcao contagem_erros()
+	{
+		escreva("Quantidade de erros do jogador: ")
+		escreva(cont_erros)
+		escreva("\n")
 	}
 }
 
@@ -288,7 +338,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1882; 
+ * @POSICAO-CURSOR = 7625; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
